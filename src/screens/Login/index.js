@@ -4,14 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles as appStyles } from '../../styles';
 
-export function DetailsScreen({ navigation }) {
+export function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={[appStyles.mainStyle, styles.wrapper]}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Login"
-        onPress={() => navigation.navigate('Login')}
-      />
+      <Text>Login Screen</Text>
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </SafeAreaView>
   );
 }

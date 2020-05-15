@@ -9,8 +9,8 @@ export function HomeScreen({ navigation }) {
     <SafeAreaView style={[appStyles.mainStyle, styles.wrapper]}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="Go to Login"
+        onPress={() => navigation.navigate('Login')}
       />
     </SafeAreaView>
   );
