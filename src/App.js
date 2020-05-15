@@ -9,17 +9,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from './screens/Home';
 import { DetailsScreen } from './screens/Details';
 
+import { AppStoreProvider } from './contexts';
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator headerMode="none">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AppStoreProvider>
+        <NavigationContainer>
+          <Stack.Navigator headerMode="none">
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Details" component={DetailsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AppStoreProvider>
     </SafeAreaProvider>
   );
 };
