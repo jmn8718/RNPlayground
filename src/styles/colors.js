@@ -11,7 +11,6 @@ export const COLORS = {
 
 export const getColor = function (color = '') {
   const rgb = COLORS[color.toUpperCase()];
-  console.log(rgb);
   if (!rgb) {
     console.warn(`Missing color: ${color}`);
     return `rgb(${COLORS.WHITE})`;

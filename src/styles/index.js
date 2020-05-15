@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { getColor } from './colors';
 
+const BACKGROUND_COLOR = getColor('WHITE');
 export const styles = StyleSheet.create({
   mainStyle: {
-    backgroundColor: getColor('WHITE'),
+    backgroundColor: BACKGROUND_COLOR,
   },
   tabBarStyle: {
     borderTopColor: getColor('LIGHT_GREY'),
@@ -11,6 +12,6 @@ export const styles = StyleSheet.create({
   },
   tabBarTabStyle: {
     height: 50,
-    backgroundColor: getColor('WHITE'),
+    backgroundColor: BACKGROUND_COLOR,
   },
 });
