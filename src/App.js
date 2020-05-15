@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { MainScreen } from './screens/Main';
+import { MainHeader } from './screens/Main/header';
 import { LoginScreen } from './screens/Login';
 
 import { AppStoreProvider } from './contexts';
@@ -17,9 +18,24 @@ const App = () => {
     <SafeAreaProvider>
       <AppStoreProvider>
         <NavigationContainer>
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Main" component={MainScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Navigator headerMode="screen">
+            <Stack.Screen
+              name="Main"
+              component={MainScreen}
+              options={{
+                header: MainHeader,
+              }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{
+                headerShown: true,
+                headerTitleAlign: 'center',
+                headerBackTitleVisible: false,
+                title: 'Login',
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </AppStoreProvider>

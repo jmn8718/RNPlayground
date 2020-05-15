@@ -14,9 +14,11 @@ This project is a test project to try some react native libraries
 ## libraries
 
 - [react-native-navigation](https://reactnavigation.org/): Tutorials on how to use and setup the navigation on a react-native app
+- [react-native-vector-icons](react-native-vector-icons): Set of icons to use on the app
 
 ## References
 
 - [React Native Docs](https://reactnative.dev/docs/getting-started.html)
 - [React native express](http://www.reactnativeexpress.com/)
 - [react-native-navigation](https://reactnavigation.org/)
+- [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
