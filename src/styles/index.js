@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
   tabBarStyle: {
     borderTopColor: getColor('LIGHT_GREY'),
     borderTopWidth: 1,
+    paddingBottom: 0,
   },
   tabBarTabStyle: {
-    height: 50,
-    backgroundColor: BACKGROUND_COLOR,
+    // height: 50,
   },
 });
