@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { MainScreen } from './screens/Main';
-import { MainHeader } from './screens/Main/header';
+import { MainHeader } from './components/Header';
 import { LoginScreen } from './screens/Login';
 
 import { AppStoreProvider } from './contexts';
