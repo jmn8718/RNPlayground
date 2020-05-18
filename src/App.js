@@ -30,10 +30,10 @@ const App = () => {
               name="Login"
               component={LoginScreen}
               options={{
-                headerShown: true,
-                headerTitleAlign: 'center',
-                headerBackTitleVisible: false,
-                title: 'Login',
+                headerShown: false,
+                // headerTitleAlign: 'center',
+                // headerBackTitleVisible: false,
+                // title: 'Login',
               }}
             />
           </Stack.Navigator>
