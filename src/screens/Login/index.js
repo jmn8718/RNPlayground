@@ -91,7 +91,7 @@ export function LoginScreen({ navigation }) {
           noMarginBottom
         />
       </ButtonsContainer>
-      <View style={styles.bottomWrapper} />
+      <View style={{ ...styles.bottomWrapper, marginBottom: insets.bottom }} />
     </View>
   );
 }
