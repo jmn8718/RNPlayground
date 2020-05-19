@@ -15,6 +15,8 @@ This project is a test project to try some react native libraries
 
 - [react-native-navigation](https://reactnavigation.org/): Tutorials on how to use and setup the navigation on a react-native app
 - [react-native-vector-icons](react-native-vector-icons): Set of icons to use on the app
+- [react-native-community/google-signin](https://github.com/react-native-community/google-signin): Sign in with google
+- [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk): Sign in with facebook
 
 ## References
 

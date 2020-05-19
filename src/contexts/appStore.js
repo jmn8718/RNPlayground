@@ -1,9 +1,24 @@
 import React, { createContext, useReducer } from 'react';
 
-const initialState = {};
+const initialState = {
+  user: null,
+  provider: '',
+};
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'SET_USER':
+      return {
+        ...state,
+        user: action.payload.user,
+        provider: action.payload.provider,
+      };
+    case 'CLEAR_USER':
+      return {
+        ...state,
+        user: null,
+        provider: '',
+      };
     default:
       return state;
   }

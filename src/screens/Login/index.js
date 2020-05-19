@@ -1,51 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import {
-  LoginManager,
-  AccessToken,
-  GraphRequest,
-  GraphRequestManager,
-} from 'react-native-fbsdk';
-import { GoogleSignin } from '@react-native-community/google-signin';
 
+import auth from '../../services/auth';
 import { styles as appStyles } from '../../styles';
 import { ButtonsContainer } from './container';
 import { LogoContainer } from './logo';
-import { ActionButton } from './actionButton';
 import { SocialButton } from './socialButton';
 import { getColor } from '../../styles/colors';
+import { AppStoreContext } from '../../contexts';
 
 const { width } = Dimensions.get('window');
 
 export function LoginScreen({ navigation }) {
-  const getFBUserInfo = async function () {
-    try {
-      const infoRequest = new GraphRequest('/me', null, (err, result) => {
-        console.log({ err, result });
-      });
-      new GraphRequestManager().addRequest(infoRequest).start();
-    } catch (err) {
-      console.log(err);
-    }
+  const { dispatch } = useContext(AppStoreContext);
+
+  const onLoginComplete = function (user, provider) {
+    dispatch({
+      type: 'SET_USER',
+      payload: {
+        user,
+        provider,
+      },
+    });
+    navigation.goBack();
   };
+
   const fbLogin = async function () {
     try {
-      let data = await AccessToken.getCurrentAccessToken();
-      if (!data || !data.accessToken) {
-        const result = await LoginManager.logInWithPermissions([
-          'public_profile',
-          'email',
-        ]);
-
-        if (!result.isCancelled) {
-          data = await AccessToken.getCurrentAccessToken();
-        }
-      }
-      if (data && data.accessToken) {
-        getFBUserInfo();
-      } else {
-        // TODO show message
-      }
+      const user = await auth.facebookLogin();
+      onLoginComplete(user, 'facebook');
     } catch (err) {
       console.log(err);
     }
@@ -53,28 +36,13 @@ export function LoginScreen({ navigation }) {
 
   const googleLogin = async function () {
     try {
-      await GoogleSignin.hasPlayServices();
-      const isSignedIn = await GoogleSignin.isSignedIn();
-
-      if (!isSignedIn) {
-        const userInfo = await GoogleSignin.signIn();
-      } else {
-        const currentUser = await GoogleSignin.getCurrentUser();
-      }
+      const user = await auth.googleLogin();
+      onLoginComplete(user, 'google');
     } catch (err) {
       console.log(err);
     }
   };
 
-  const logout = async function () {
-    try {
-      // TODO only call authenticated provider
-      await LoginManager.logOut();
-      await GoogleSignin.signOut();
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <View style={[appStyles.mainStyle, styles.wrapper]}>
       <LogoContainer />
@@ -93,9 +61,7 @@ export function LoginScreen({ navigation }) {
           noMarginBottom
         />
       </ButtonsContainer>
-      <View style={styles.actionButtonWrapper}>
-        <ActionButton text="LOGOUT" width={width} onPress={logout} />
-      </View>
+      <View style={styles.bottomWrapper} />
     </View>
   );
 }
@@ -107,8 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: getColor('LIGHTER_GREY'),
   },
-  actionButtonWrapper: {
+  bottomWrapper: {
     flex: 1,
-    justifyContent: 'flex-end',
   },
 });
