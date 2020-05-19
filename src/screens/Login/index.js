@@ -6,6 +6,7 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk';
+import { GoogleSignin } from '@react-native-community/google-signin';
 
 import { styles as appStyles } from '../../styles';
 import { ButtonsContainer } from './container';
@@ -50,9 +51,26 @@ export function LoginScreen({ navigation }) {
     }
   };
 
+  const googleLogin = async function () {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const isSignedIn = await GoogleSignin.isSignedIn();
+
+      if (!isSignedIn) {
+        const userInfo = await GoogleSignin.signIn();
+      } else {
+        const currentUser = await GoogleSignin.getCurrentUser();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const logout = async function () {
     try {
+      // TODO only call authenticated provider
       await LoginManager.logOut();
+      await GoogleSignin.signOut();
     } catch (err) {
       console.log(err);
     }
@@ -65,6 +83,7 @@ export function LoginScreen({ navigation }) {
           image={require('./icons/icGoogle.png')}
           text="GOOGLE"
           name="google"
+          onPress={googleLogin}
         />
         <SocialButton
           image={require('./icons/icFacebook.png')}
