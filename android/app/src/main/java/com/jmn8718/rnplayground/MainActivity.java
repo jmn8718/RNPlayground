@@ -1,4 +1,4 @@
-package com.rnplayground;
+package com.jmn8718.rnplayground;
 
 import com.facebook.react.ReactActivity;
 
