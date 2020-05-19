@@ -4,10 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles as appStyles } from '../../styles';
 
-export function DetailsScreen() {
+export function SettingsScreen() {
   return (
     <SafeAreaView style={[appStyles.mainStyle, styles.wrapper]}>
-      <Text>Details Screen</Text>
+      <Text>Settings Screen</Text>
     </SafeAreaView>
   );
 }

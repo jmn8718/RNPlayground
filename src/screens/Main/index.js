@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HomeScreen } from '../Home';
-import { DetailsScreen } from '../Details';
+import { SettingsScreen } from '../Settings';
 import { styles } from '../../styles';
 import { getColor } from '../../styles/colors';
 
@@ -20,7 +20,7 @@ export const MainScreen = function () {
           let iconName;
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Details') {
+          } else if (route.name === 'Settings') {
             iconName = 'settings';
           }
           iconName = `${Platform.OS === 'ios' ? 'ios' : 'md'}-${iconName}`;
@@ -34,7 +34,7 @@ export const MainScreen = function () {
         tabStyle: { ...styles.tabBarTabStyle, paddingBottom: insets.bottom },
       }}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Details" component={DetailsScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
