@@ -16,6 +16,7 @@ import { LogoContainer } from './logo';
 import { SocialButton } from './socialButton';
 import { getColor } from '../../styles/colors';
 import { AppStoreContext } from '../../contexts';
+import { storeObject, STORE_KEYS } from '../../services/storage';
 
 const { width } = Dimensions.get('window');
 
@@ -26,13 +27,15 @@ export function LoginScreen({ navigation }) {
   const { dispatch } = useContext(AppStoreContext);
 
   const onLoginComplete = function (user, provider) {
+    const payload = {
+      user,
+      provider,
+    };
     dispatch({
       type: 'SET_USER',
-      payload: {
-        user,
-        provider,
-      },
+      payload,
     });
+    storeObject(STORE_KEYS.USER, payload);
     navigation.goBack();
   };
 

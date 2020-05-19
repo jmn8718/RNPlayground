@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
-import { GoogleSignin } from '@react-native-community/google-signin';
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useEffect, useContext } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,42 +7,45 @@ import { MainScreen } from './screens/Main';
 import { MainHeader } from './components/Header';
 import { LoginScreen } from './screens/Login';
 
-import { AppStoreProvider } from './contexts';
+import { AppStoreContext } from './contexts';
+import { STORE_KEYS, getObject } from './services/storage';
 
 const Stack = createStackNavigator();
 
-const App = () => {
+export const App = () => {
+  const { dispatch } = useContext(AppStoreContext);
   useEffect(() => {
-    GoogleSignin.configure();
+    populateStore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const populateStore = async function () {
+    const payload = await getObject(STORE_KEYS.USER);
+    if (payload) {
+      dispatch({
+        type: 'SET_USER',
+        payload,
+      });
+    }
+  };
   return (
-    <SafeAreaProvider>
-      <AppStoreProvider>
-        <NavigationContainer>
-          <Stack.Navigator headerMode="screen">
-            <Stack.Screen
-              name="Main"
-              component={MainScreen}
-              options={{
-                header: MainHeader,
-              }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{
-                headerShown: false,
-                // headerTitleAlign: 'center',
-                // headerBackTitleVisible: false,
-                // title: 'Login',
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AppStoreProvider>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Stack.Navigator headerMode="screen">
+        <Stack.Screen
+          name="Main"
+          component={MainScreen}
+          options={{
+            header: MainHeader,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-export default App;

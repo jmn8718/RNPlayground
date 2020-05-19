@@ -17,6 +17,7 @@ This project is a test project to try some react native libraries
 - [react-native-vector-icons](react-native-vector-icons): Set of icons to use on the app
 - [react-native-community/google-signin](https://github.com/react-native-community/google-signin): Sign in with google
 - [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk): Sign in with facebook
+- [react-native-community/async-storage](@react-native-community/async-storage): Persista app data
 
 ## References
 
@@ -24,3 +25,4 @@ This project is a test project to try some react native libraries
 - [React native express](http://www.reactnativeexpress.com/)
 - [react-native-navigation](https://reactnavigation.org/)
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+- [async-storage](@react-native-community/async-storage)
