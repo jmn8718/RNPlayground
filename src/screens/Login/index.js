@@ -48,13 +48,13 @@ export function LoginScreen({ navigation }) {
       <LogoContainer />
       <ButtonsContainer width={width}>
         <SocialButton
-          image={require('./icons/icGoogle.png')}
+          image={require('../../assets/icons/icGoogle.png')}
           text="GOOGLE"
           name="google"
           onPress={googleLogin}
         />
         <SocialButton
-          image={require('./icons/icFacebook.png')}
+          image={require('../../assets/icons/icFacebook.png')}
           text="FACEBOOK"
           name="facebook"
           onPress={fbLogin}
