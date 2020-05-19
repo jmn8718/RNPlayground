@@ -1,5 +1,13 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import auth from '../../services/auth';
 import { styles as appStyles } from '../../styles';
@@ -11,7 +19,10 @@ import { AppStoreContext } from '../../contexts';
 
 const { width } = Dimensions.get('window');
 
+const HEADER_HEIGHT = 50;
+
 export function LoginScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
   const { dispatch } = useContext(AppStoreContext);
 
   const onLoginComplete = function (user, provider) {
@@ -43,8 +54,24 @@ export function LoginScreen({ navigation }) {
     }
   };
 
+  const onPressBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={[appStyles.mainStyle, styles.wrapper]}>
+      <View style={{ ...styles.headerRow, marginTop: insets.top }}>
+        <TouchableOpacity
+          onPress={onPressBack}
+          activeOpacity={0.5}
+          style={styles.headerAction}>
+          <Icon
+            name={`${Platform.OS === 'ios' ? 'ios' : 'md'}-arrow-back`}
+            size={30}
+            color={getColor('BLACK')}
+          />
+        </TouchableOpacity>
+      </View>
       <LogoContainer />
       <ButtonsContainer width={width}>
         <SocialButton
@@ -74,6 +101,19 @@ const styles = StyleSheet.create({
     backgroundColor: getColor('LIGHTER_GREY'),
   },
   bottomWrapper: {
+    flex: 1,
+  },
+  headerRow: {
+    flex: 0,
+    height: HEADER_HEIGHT,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingHorizontal: 30,
+  },
+  headerAction: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
   },
 });

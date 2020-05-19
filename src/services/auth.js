@@ -47,8 +47,12 @@ export const facebookLogin = async function () {
   }
 };
 
-export const getGoogleUserInfo = function () {
-  return GoogleSignin.getCurrentUser();
+export const getGoogleUserInfo = async function () {
+  const user = await GoogleSignin.getCurrentUser();
+  if (!user) {
+    return GoogleSignin.signIn();
+  }
+  return user;
 };
 
 export const googleLogin = async function () {

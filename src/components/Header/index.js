@@ -1,22 +1,26 @@
 import React, { useContext } from 'react';
-import { View, Platform, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Platform, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { styles as appStyles } from '../../styles';
 import { AppStoreContext } from '../../contexts';
 import auth from '../../services/auth';
+import { getColor } from '../../styles/colors';
 
 const UserIcon = function ({ user, onPress = () => {} }) {
   const iconName = user ? 'log-out' : 'log-in';
   return (
-    <TouchableHighlight style={styles.iconRightWrapper} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.iconRightWrapper}
+      onPress={onPress}
+      activeOpacity={0.5}>
       <Icon
         name={`${Platform.OS === 'ios' ? 'ios' : 'md'}-${iconName}`}
         size={30}
-        color="black"
+        color={getColor('BLACK')}
       />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 
