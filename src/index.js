@@ -4,6 +4,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AppStoreProvider } from './contexts';
+import { PlayerProvider } from './screens/VideoPlayer';
 import { App } from './App';
 
 export default () => {
@@ -14,7 +15,9 @@ export default () => {
   return (
     <SafeAreaProvider>
       <AppStoreProvider>
-        <App />
+        <PlayerProvider>
+          <App />
+        </PlayerProvider>
       </AppStoreProvider>
     </SafeAreaProvider>
   );
