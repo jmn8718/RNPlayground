@@ -14,9 +14,6 @@ import Animated, {
   sub,
   multiply,
   lessThan,
-  clockRunning,
-  startClock,
-  spring,
   stopClock,
   event,
   interpolate,
@@ -28,6 +25,7 @@ import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { getColor } from '../../styles/colors';
 import { VideoContent } from './VideoContent';
 import { PlayerControls, PLACEHOLDER_WIDTH } from './PlayerControls';
+import { runSpring } from './utils';
 
 // TODO add proper video player
 import { Player } from './Player';
@@ -35,8 +33,8 @@ import { Player } from './Player';
 const AnimatedVideo = Animated.createAnimatedComponent(Player);
 
 const { height, width } = Dimensions.get('window');
-const minHeight = 64;
-const midBound = height - 64 * 3;
+const minHeight = 84;
+const midBound = height - 44 - 84 * 2;
 const upperBound = midBound + minHeight;
 
 const shadow = {
@@ -46,39 +44,6 @@ const shadow = {
   shadowOpacity: 0.18,
   shadowRadius: 2,
 };
-
-// TODO extract to separate file
-function runSpring(clock, value, dest) {
-  const state = {
-    finished: new Value(0),
-    velocity: new Value(0),
-    position: new Value(0),
-    time: new Value(0),
-  };
-
-  const config = {
-    damping: 20,
-    mass: 1,
-    stiffness: 100,
-    overshootClamping: false,
-    restSpeedThreshold: 1,
-    restDisplacementThreshold: 0.5,
-    toValue: new Value(0),
-  };
-
-  return [
-    cond(clockRunning(clock), 0, [
-      set(state.finished, 0),
-      set(state.velocity, 0),
-      set(state.position, value),
-      set(config.toValue, dest),
-      startClock(clock),
-    ]),
-    spring(clock, state, config),
-    cond(state.finished, stopClock(clock)),
-    state.position,
-  ];
-}
 
 export class VideoModal extends React.PureComponent {
   translationY = new Value(0);
@@ -184,7 +149,7 @@ export class VideoModal extends React.PureComponent {
     });
     const videoHeight = interpolate(translateY, {
       inputRange: [0, midBound, upperBound],
-      outputRange: [width / 1.78, minHeight * 1.3, minHeight],
+      outputRange: [width / 1.78, minHeight, minHeight],
       extrapolate: Extrapolate.CLAMP,
     });
     const containerHeight = interpolate(translateY, {

@@ -7,7 +7,7 @@ import { VideoModal } from './VideoModal';
 const { height } = Dimensions.get('window');
 
 export const PlayerProvider = function ({ children }) {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // animation will be used as the value for opacity. Initial Value: 0
   const animation = useRef(new Value(0)).current;
 
   const [video, setVideo] = useState(null);
