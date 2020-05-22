@@ -4,6 +4,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Orientation.h"
 
 #if DEBUG
 #import <FlipperKit/FlipperClient.h>
@@ -59,6 +60,10 @@ static void InitializeFlipper(UIApplication *application) {
   return [[FBSDKApplicationDelegate sharedInstance]application:app
                                                        openURL:url
                                                        options:options];
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
