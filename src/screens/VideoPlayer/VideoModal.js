@@ -167,8 +167,8 @@ export class VideoModal extends React.PureComponent {
         {(insets) => (
           <View
             style={{
-              marginTop: insets.top,
-              marginBottom: insets.bottom,
+              paddingTop: insets.top,
+              paddingBottom: insets.bottom,
             }}>
             <PanGestureHandler
               onHandlerStateChange={onGestureEvent}
@@ -197,6 +197,7 @@ export class VideoModal extends React.PureComponent {
                   </Animated.View>
                   <AnimatedVideo
                     style={{ width: videoWidth, height: videoHeight }}
+                    video={this.props.video}
                   />
                 </Animated.View>
                 <Animated.View
@@ -206,7 +207,7 @@ export class VideoModal extends React.PureComponent {
                     backgroundColor: getColor('WHITE'),
                   }}>
                   <Animated.View style={{ opacity }}>
-                    <VideoContent />
+                    <VideoContent video={this.props.video} />
                   </Animated.View>
                 </Animated.View>
               </Animated.View>
